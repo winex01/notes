@@ -57,6 +57,18 @@ class NoteCrudController extends CrudController
 
     }
 
+    public function setupShowOperation()
+    {
+        $this->setupListOperation();
+    
+        $this->crud->addColumn([
+            'name' => 'created_at'
+        ]);
+
+        $this->crud->addColumn([
+            'name' => 'updated_at'
+        ]);
+    }
 
     /**
      * Define what happens when the Create operation is loaded.
