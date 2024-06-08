@@ -9,5 +9,6 @@
     <x-backpack::menu-dropdown-item title="Roles" icon="la la-group" :link="backpack_url('role')" />
     <x-backpack::menu-dropdown-item title="Permissions" icon="la la-key" :link="backpack_url('permission')" />
     <x-backpack::menu-dropdown-header title="Tools / Etc..." />
+    <x-backpack::menu-dropdown-item title='Backups' icon='la la-hdd-o' :link="backpack_url('backup')" />
     <x-backpack::menu-dropdown-item :title="trans('backpack::crud.file_manager')" icon="la la-files-o" :link="backpack_url('elfinder')" />
 </x-backpack::menu-dropdown>
