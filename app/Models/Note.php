@@ -56,4 +56,18 @@ class Note extends Model
     | MUTATORS
     |--------------------------------------------------------------------------
     */
+    public function setAttachmentAttribute($value)
+    {
+        $attribute_name = "attachment";
+        $disk = "public";
+        $destination_path = "uploads";
+
+        // Extract the original filename
+        $originalFileName = $value->getClientOriginalName();
+
+        // Upload the file with the original filename
+        $this->uploadFileToDisk($value, $attribute_name, $disk, $destination_path, $originalFileName);
+
+        // return $this->attributes[{$attribute_name}]; // uncomment if this is a translatable field
+    }
 }

@@ -69,10 +69,8 @@ class NoteCrudController extends CrudController
 
          CRUD::modifyField('attachment', [
             'type'      => 'upload',
-            'withFiles' => true
+            'upload'    => true,
          ]);
-
-        //  TODO:: check upload if it's uploaded successfully
 
     }
 

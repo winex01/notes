@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->text('description')->nullable();
-            $table->string('attachment'); //for files, app.exe image and etc...
+            $table->string('attachment')->nullable();
             $table->softDeletes(); 
             $table->timestamps();
         });
