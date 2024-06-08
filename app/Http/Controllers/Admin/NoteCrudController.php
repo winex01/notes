@@ -66,6 +66,14 @@ class NoteCrudController extends CrudController
          * Fields can be defined using the fluent syntax:
          * - CRUD::field('price')->type('number');
          */
+
+         CRUD::modifyField('attachment', [
+            'type'      => 'upload',
+            'withFiles' => true
+         ]);
+
+        //  TODO:: check upload if it's uploaded successfully
+
     }
 
     /**
