@@ -12,7 +12,8 @@
         "backpack/permissionmanager": "^7.2",
         "backpack/theme-tabler": "^1.2",
         "laravel/framework": "^11.9",
-        "laravel/tinker": "^2.9"
+        "laravel/tinker": "^2.9",
+        "orangehill/iseed": "^3.0"
     },
     "require-dev": {
         "backpack/generators": "^4.0",
