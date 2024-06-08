@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\NoteRequest;
+use Illuminate\Support\HtmlString;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
@@ -45,7 +46,17 @@ class NoteCrudController extends CrudController
          * Columns can be defined using the fluent syntax:
          * - CRUD::column('price')->type('number');
          */
+
+        $this->crud->modifyColumn('attachment', [
+            'wrapper'   => [
+                'href' => function ($crud, $column, $entry, $related_key) {
+                    return url($entry->attachment);
+                },
+            ],
+        ]);
+
     }
+
 
     /**
      * Define what happens when the Create operation is loaded.
