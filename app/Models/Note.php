@@ -65,9 +65,20 @@ class Note extends Model
         // Extract the original filename
         $originalFileName = $value->getClientOriginalName();
 
-        // Upload the file with the original filename
-        $this->uploadFileToDisk($value, $attribute_name, $disk, $destination_path, $originalFileName);
+        // Separate the filename and the extension
+        $fileNameWithoutExt = pathinfo($originalFileName, PATHINFO_FILENAME);
+        $fileExtension = pathinfo($originalFileName, PATHINFO_EXTENSION);
 
-        // return $this->attributes[{$attribute_name}]; // uncomment if this is a translatable field
+        // Generate a unique string (e.g., current timestamp with microseconds)
+        $uniqueString = now()->format('YmdHis') . uniqid();
+
+        // Concatenate the original filename (without extension) with the unique string, then add the extension
+        $uniqueFileName = $fileNameWithoutExt . '_' . $uniqueString . '.' . $fileExtension;
+
+        // Upload the file with the unique filename
+        $this->uploadFileToDisk($value, $attribute_name, $disk, $destination_path, $uniqueFileName);
+
+        // return $this->attributes[$attribute_name]; // uncomment if this is a translatable field
     }
+
 }
