@@ -50,7 +50,11 @@ class NoteCrudController extends CrudController
         $this->crud->modifyColumn('attachment', [
             'wrapper'   => [
                 'href' => function ($crud, $column, $entry, $related_key) {
-                    return url($entry->attachment);
+                    if ($entry->attachment) {
+                        return url($entry->attachment);
+                    }
+
+                    return '';
                 },
             ],
         ]);
@@ -80,7 +84,7 @@ class NoteCrudController extends CrudController
     {
         CRUD::setValidation([
             'name' => 'required|min:2',
-            'attachment' => 'required'
+            // 'attachment' => 'required'
         ]);
 
         CRUD::setFromDb(); // set fields from db columns.
