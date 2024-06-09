@@ -59,6 +59,10 @@ class NoteCrudController extends CrudController
             ],
         ]);
 
+        $this->crud->modifyColumn('link',[
+            'type' => 'url'
+        ]);
+
     }
 
     public function setupShowOperation()
