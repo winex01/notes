@@ -63,6 +63,9 @@ class NoteCrudController extends CrudController
             'type' => 'url'
         ]);
 
+        $this->crud->modifyColumn('description', [
+            'type' => 'summernote'
+        ]);
     }
 
     public function setupShowOperation()
@@ -102,6 +105,11 @@ class NoteCrudController extends CrudController
             'type'      => 'upload',
             'upload'    => true,
          ]);
+
+
+         $this->crud->modifyField('description', [
+            'type' => 'summernote'
+        ]);
 
     }
 

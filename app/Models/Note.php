@@ -81,4 +81,9 @@ class Note extends Model
         // return $this->attributes[$attribute_name]; // uncomment if this is a translatable field
     }
 
+    public function getDescriptionAttribute($value)
+    {
+        return clean($value);
+    }
+
 }
