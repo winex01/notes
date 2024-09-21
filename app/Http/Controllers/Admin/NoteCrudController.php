@@ -22,7 +22,7 @@ class NoteCrudController extends CrudController
 
     /**
      * Configure the CrudPanel object. Apply settings to all operations.
-     * 
+     *
      * @return void
      */
     public function setup()
@@ -34,7 +34,7 @@ class NoteCrudController extends CrudController
 
     /**
      * Define what happens when the List operation is loaded.
-     * 
+     *
      * @see  https://backpackforlaravel.com/docs/crud-operation-list-entries
      * @return void
      */
@@ -48,30 +48,21 @@ class NoteCrudController extends CrudController
          */
 
         $this->crud->modifyColumn('attachment', [
-            'wrapper'   => [
-                'href' => function ($crud, $column, $entry, $related_key) {
-                    if ($entry->attachment) {
-                        return url($entry->attachment);
-                    }
-
-                    return '';
-                },
-            ],
+            'type' => 'upload',
+            'disk' => 'public',
         ]);
 
-        $this->crud->modifyColumn('link',[
+        $this->crud->modifyColumn('link', [
             'type' => 'url'
         ]);
 
-        $this->crud->modifyColumn('description', [
-            'type' => 'summernote'
-        ]);
+        $this->crud->removeColumns(['description']);
     }
 
     public function setupShowOperation()
     {
         $this->setupListOperation();
-    
+
         $this->crud->addColumn([
             'name' => 'created_at'
         ]);
@@ -79,11 +70,16 @@ class NoteCrudController extends CrudController
         $this->crud->addColumn([
             'name' => 'updated_at'
         ]);
+
+        $this->crud->column([
+            'name' => 'description',
+            'type' => 'summernote',
+        ])->after('name');
     }
 
     /**
      * Define what happens when the Create operation is loaded.
-     * 
+     *
      * @see https://backpackforlaravel.com/docs/crud-operation-create
      * @return void
      */
@@ -101,13 +97,13 @@ class NoteCrudController extends CrudController
          * - CRUD::field('price')->type('number');
          */
 
-         CRUD::modifyField('attachment', [
-            'type'      => 'upload',
-            'upload'    => true,
-         ]);
+        CRUD::modifyField('attachment', [
+            'type' => 'upload',
+            'upload' => true,
+        ]);
 
 
-         $this->crud->modifyField('description', [
+        $this->crud->modifyField('description', [
             'type' => 'summernote'
         ]);
 
@@ -115,7 +111,7 @@ class NoteCrudController extends CrudController
 
     /**
      * Define what happens when the Update operation is loaded.
-     * 
+     *
      * @see https://backpackforlaravel.com/docs/crud-operation-update
      * @return void
      */
