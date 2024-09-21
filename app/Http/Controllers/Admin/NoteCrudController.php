@@ -50,25 +50,13 @@ class NoteCrudController extends CrudController
         $this->crud->modifyColumn('attachment', [
             'type' => 'upload',
             'disk' => 'public',
-            // 'wrapper' => [
-            //     'href' => function ($crud, $column, $entry, $related_key) {
-            //         if ($entry->attachment) {
-            //             return url('storage/' . $entry->attachment);
-            //         }
-
-            //         return '';
-            //     },
-            // ],
-            // 'prefix' => 'storage/'
         ]);
 
         $this->crud->modifyColumn('link', [
             'type' => 'url'
         ]);
 
-        $this->crud->modifyColumn('description', [
-            'type' => 'summernote'
-        ]);
+        $this->crud->removeColumns(['description']);
     }
 
     public function setupShowOperation()
@@ -82,6 +70,11 @@ class NoteCrudController extends CrudController
         $this->crud->addColumn([
             'name' => 'updated_at'
         ]);
+
+        $this->crud->column([
+            'name' => 'description',
+            'type' => 'summernote',
+        ])->after('name');
     }
 
     /**
