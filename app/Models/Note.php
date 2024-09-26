@@ -56,30 +56,30 @@ class Note extends Model
     | MUTATORS
     |--------------------------------------------------------------------------
     */
-    public function setAttachmentAttribute($value)
-    {
-        $attribute_name = "attachment";
-        $disk = "public";
-        $destination_path = "uploads";
+    // public function setAttachmentAttribute($value)
+    // {
+    //     $attribute_name = "attachment";
+    //     $disk = "public";
+    //     $destination_path = "uploads";
 
-        // Extract the original filename
-        $originalFileName = $value->getClientOriginalName();
+    //     // Extract the original filename
+    //     $originalFileName = $value->getClientOriginalName();
 
-        // Separate the filename and the extension
-        $fileNameWithoutExt = pathinfo($originalFileName, PATHINFO_FILENAME);
-        $fileExtension = pathinfo($originalFileName, PATHINFO_EXTENSION);
+    //     // Separate the filename and the extension
+    //     $fileNameWithoutExt = pathinfo($originalFileName, PATHINFO_FILENAME);
+    //     $fileExtension = pathinfo($originalFileName, PATHINFO_EXTENSION);
 
-        // Generate a unique string (e.g., current timestamp with microseconds)
-        $uniqueString = now()->format('YmdHis') . uniqid();
+    //     // Generate a unique string (e.g., current timestamp with microseconds)
+    //     $uniqueString = now()->format('YmdHis') . uniqid();
 
-        // Concatenate the original filename (without extension) with the unique string, then add the extension
-        $uniqueFileName = $fileNameWithoutExt . '_' . $uniqueString . '.' . $fileExtension;
+    //     // Concatenate the original filename (without extension) with the unique string, then add the extension
+    //     $uniqueFileName = $fileNameWithoutExt . '_' . $uniqueString . '.' . $fileExtension;
 
-        // Upload the file with the unique filename
-        $this->uploadFileToDisk($value, $attribute_name, $disk, $destination_path, $uniqueFileName);
+    //     // Upload the file with the unique filename
+    //     $this->uploadFileToDisk($value, $attribute_name, $disk, $destination_path, $uniqueFileName);
 
-        // return $this->attributes[$attribute_name]; // uncomment if this is a translatable field
-    }
+    //     // return $this->attributes[$attribute_name]; // uncomment if this is a translatable field
+    // }
 
     public function getDescriptionAttribute($value)
     {

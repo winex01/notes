@@ -42,11 +42,6 @@ class NoteCrudController extends CrudController
     {
         CRUD::setFromDb(); // set columns from db columns.
 
-        /**
-         * Columns can be defined using the fluent syntax:
-         * - CRUD::column('price')->type('number');
-         */
-
         $this->crud->modifyColumn('attachment', [
             'type' => 'upload',
             'disk' => 'public',
@@ -57,6 +52,14 @@ class NoteCrudController extends CrudController
         ]);
 
         $this->crud->removeColumns(['description']);
+
+        $this->crud->column([
+            'name' => 'description',
+            'type' => 'summernote',
+            'searchLogic' => function ($query, $column, $searchTerm) {
+                $query->orWhere('description', 'like', '%' . $searchTerm . '%');
+            }
+        ]);
     }
 
     public function setupShowOperation()
@@ -92,21 +95,17 @@ class NoteCrudController extends CrudController
 
         CRUD::setFromDb(); // set fields from db columns.
 
-        /**
-         * Fields can be defined using the fluent syntax:
-         * - CRUD::field('price')->type('number');
-         */
-
-        CRUD::modifyField('attachment', [
-            'type' => 'upload',
-            'upload' => true,
-        ]);
-
-
         $this->crud->modifyField('description', [
             'type' => 'summernote'
         ]);
 
+        $this->crud->removeField('attachment');
+
+        $this->crud->field([   // Upload
+            'name' => 'attachment',
+            'type' => 'upload',
+            'withFiles' => true
+        ]);
     }
 
     /**
